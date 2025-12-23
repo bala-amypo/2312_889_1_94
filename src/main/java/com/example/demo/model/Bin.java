@@ -10,7 +10,7 @@ public class Bin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String identifier;
     
     private String locationDescription;
@@ -22,17 +22,14 @@ public class Bin {
     private Zone zone;
     
     private Double capacityLiters;
-    private Boolean active = true;
-    
+    private Boolean active;
     private Timestamp createdAt;
     private Timestamp updatedAt;
     
-    // Constructors
     public Bin() {}
     
-    public Bin(String identifier, String locationDescription, Double latitude, 
-               Double longitude, Zone zone, Double capacityLiters, 
-               Boolean active, Timestamp createdAt, Timestamp updatedAt) {
+    public Bin(String identifier, String locationDescription, Double latitude, Double longitude, 
+               Zone zone, Double capacityLiters, Boolean active, Timestamp createdAt, Timestamp updatedAt) {
         this.identifier = identifier;
         this.locationDescription = locationDescription;
         this.latitude = latitude;
@@ -52,9 +49,7 @@ public class Bin {
     public void setIdentifier(String identifier) { this.identifier = identifier; }
     
     public String getLocationDescription() { return locationDescription; }
-    public void setLocationDescription(String locationDescription) { 
-        this.locationDescription = locationDescription; 
-    }
+    public void setLocationDescription(String locationDescription) { this.locationDescription = locationDescription; }
     
     public Double getLatitude() { return latitude; }
     public void setLatitude(Double latitude) { this.latitude = latitude; }
@@ -66,9 +61,7 @@ public class Bin {
     public void setZone(Zone zone) { this.zone = zone; }
     
     public Double getCapacityLiters() { return capacityLiters; }
-    public void setCapacityLiters(Double capacityLiters) { 
-        this.capacityLiters = capacityLiters; 
-    }
+    public void setCapacityLiters(Double capacityLiters) { this.capacityLiters = capacityLiters; }
     
     public Boolean getActive() { return active; }
     public void setActive(Boolean active) { this.active = active; }
