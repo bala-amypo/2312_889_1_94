@@ -27,7 +27,6 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
     }
-    
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody AuthRequest request) {
         User user = userService.registerUser(request.getEmail(), request.getEmail(), request.getPassword());
