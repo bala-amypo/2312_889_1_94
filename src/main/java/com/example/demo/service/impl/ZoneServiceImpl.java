@@ -1,18 +1,17 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Zone;
 import com.example.demo.repository.ZoneRepository;
 import com.example.demo.service.ZoneService;
-import com.example.demo.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class ZoneServiceImpl implements ZoneService {
-    
     private final ZoneRepository zoneRepository;
     
-    // Constructor injection (recommended for testing)
     public ZoneServiceImpl(ZoneRepository zoneRepository) {
         this.zoneRepository = zoneRepository;
     }
@@ -28,15 +27,15 @@ public class ZoneServiceImpl implements ZoneService {
     @Override
     public Zone updateZone(Long id, Zone zone) {
         Zone existing = getZoneById(id);
-        existing.setZoneName(zone.getZoneName());
-        existing.setDescription(zone.getDescription());
+        if (zone.getZoneName() != null) existing.setZoneName(zone.getZoneName());
+        if (zone.getDescription() != null) existing.setDescription(zone.getDescription());
         return zoneRepository.save(existing);
     }
     
     @Override
     public Zone getZoneById(Long id) {
         return zoneRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Zone not found with id: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Zone not found"));
     }
     
     @Override
