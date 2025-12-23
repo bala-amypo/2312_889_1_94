@@ -11,13 +11,12 @@ public class User {
     
     private String fullName;
     
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String email;
     
     private String password;
     private String role;
     
-    // Constructors
     public User() {}
     
     public User(String fullName, String email, String password, String role) {

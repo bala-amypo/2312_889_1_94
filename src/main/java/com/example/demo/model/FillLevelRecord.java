@@ -1,17 +1,45 @@
-package com.example.demo.repository;
+package com.example.demo.model;
 
-import com.example.demo.model.Bin;
-import com.example.demo.model.FillLevelRecord;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import jakarta.persistence.*;
+import java.sql.Timestamp;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
-@Repository
-public interface FillLevelRecordRepository extends JpaRepository<FillLevelRecord, Long> {
-    List<FillLevelRecord> findByBinOrderByRecordedAtDesc(Bin bin);
-    Optional<FillLevelRecord> findTop1ByBinOrderByRecordedAtDesc(Bin bin);
-    List<FillLevelRecord> findByBinAndRecordedAtBetween(Bin bin, LocalDateTime start, LocalDateTime end);
+@Entity
+@Table(name = "fill_level_records")
+public class FillLevelRecord {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "bin_id")
+    private Bin bin;
+    
+    private Double fillPercentage;
+    private Timestamp recordedAt;
+    private Boolean isWeekend;
+    
+    public FillLevelRecord() {}
+    
+    public FillLevelRecord(Bin bin, Double fillPercentage, Timestamp recordedAt, Boolean isWeekend) {
+        this.bin = bin;
+        this.fillPercentage = fillPercentage;
+        this.recordedAt = recordedAt;
+        this.isWeekend = isWeekend;
+    }
+    
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    
+    public Bin getBin() { return bin; }
+    public void setBin(Bin bin) { this.bin = bin; }
+    
+    public Double getFillPercentage() { return fillPercentage; }
+    public void setFillPercentage(Double fillPercentage) { this.fillPercentage = fillPercentage; }
+    
+    public Timestamp getRecordedAt() { return recordedAt; }
+    public void setRecordedAt(Timestamp recordedAt) { this.recordedAt = recordedAt; }
+    
+    public Boolean getIsWeekend() { return isWeekend; }
+    public void setIsWeekend(Boolean isWeekend) { this.isWeekend = isWeekend; }
 }

@@ -9,14 +9,12 @@ public class Zone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String zoneName;
     
     private String description;
+    private Boolean active;
     
-    private Boolean active = true;
-    
-    // Constructors
     public Zone() {}
     
     public Zone(String zoneName, String description, Boolean active) {
