@@ -35,6 +35,10 @@ public class JwtTokenProvider {
             .compact();
     }
     
+    public String generateToken(org.springframework.security.core.Authentication auth, Long userId, String role, String email) {
+        return createToken(userId, email, role);
+    }
+    
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);

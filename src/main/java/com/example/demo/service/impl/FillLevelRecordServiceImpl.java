@@ -40,7 +40,7 @@ public class FillLevelRecordServiceImpl implements FillLevelRecordService {
             throw new BadRequestException("Fill percentage must be between 0 and 100");
         }
         
-        if (record.getRecordedAt() != null && record.getRecordedAt().after(new Timestamp(System.currentTimeMillis()))) {
+        if (record.getRecordedAt() != null && record.getRecordedAt().isAfter(java.time.LocalDateTime.now())) {
             throw new BadRequestException("Recorded time cannot be in the future");
         }
         

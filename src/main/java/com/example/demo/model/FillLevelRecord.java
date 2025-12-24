@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "fill_level_records")
@@ -15,12 +15,12 @@ public class FillLevelRecord {
     private Bin bin;
     
     private Double fillPercentage;
-    private Timestamp recordedAt;
+    private LocalDateTime recordedAt;
     private Boolean isWeekend;
     
     public FillLevelRecord() {}
     
-    public FillLevelRecord(Bin bin, Double fillPercentage, Timestamp recordedAt, Boolean isWeekend) {
+    public FillLevelRecord(Bin bin, Double fillPercentage, LocalDateTime recordedAt, Boolean isWeekend) {
         this.bin = bin;
         this.fillPercentage = fillPercentage;
         this.recordedAt = recordedAt;
@@ -37,8 +37,8 @@ public class FillLevelRecord {
     public Double getFillPercentage() { return fillPercentage; }
     public void setFillPercentage(Double fillPercentage) { this.fillPercentage = fillPercentage; }
     
-    public Timestamp getRecordedAt() { return recordedAt; }
-    public void setRecordedAt(Timestamp recordedAt) { this.recordedAt = recordedAt; }
+    public LocalDateTime getRecordedAt() { return recordedAt; }
+    public void setRecordedAt(LocalDateTime recordedAt) { this.recordedAt = recordedAt; }
     
     public Boolean getIsWeekend() { return isWeekend; }
     public void setIsWeekend(Boolean isWeekend) { this.isWeekend = isWeekend; }
