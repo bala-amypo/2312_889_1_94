@@ -57,7 +57,7 @@ public class OverflowPredictionServiceImpl implements OverflowPredictionService 
         OverflowPrediction prediction = new OverflowPrediction();
         prediction.setBin(bin);
         prediction.setDaysUntilFull(daysUntilFull);
-        prediction.setPredictedFullDate(Date.valueOf(predictedDate));
+        prediction.setPredictedFullDate(predictedDate);
         prediction.setModelUsed(model);
         prediction.setGeneratedAt(new Timestamp(System.currentTimeMillis()));
         
