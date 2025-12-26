@@ -5,17 +5,16 @@ import com.example.demo.model.Zone;
 import com.example.demo.repository.ZoneRepository;
 import com.example.demo.service.ZoneService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class ZoneServiceImpl implements ZoneService {
     private final ZoneRepository zoneRepository;
-    
+
     public ZoneServiceImpl(ZoneRepository zoneRepository) {
         this.zoneRepository = zoneRepository;
     }
-    
+
     @Override
     public Zone createZone(Zone zone) {
         if (zone.getActive() == null) {
@@ -23,26 +22,29 @@ public class ZoneServiceImpl implements ZoneService {
         }
         return zoneRepository.save(zone);
     }
-    
+
     @Override
     public Zone updateZone(Long id, Zone zone) {
         Zone existing = getZoneById(id);
-        if (zone.getZoneName() != null) existing.setZoneName(zone.getZoneName());
-        if (zone.getDescription() != null) existing.setDescription(zone.getDescription());
+        existing.setZoneName(zone.getZoneName());
+        existing.setDescription(zone.getDescription());
+        if (zone.getActive() != null) {
+            existing.setActive(zone.getActive());
+        }
         return zoneRepository.save(existing);
     }
-    
+
     @Override
     public Zone getZoneById(Long id) {
         return zoneRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Zone not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Zone not found"));
     }
-    
+
     @Override
     public List<Zone> getAllZones() {
         return zoneRepository.findAll();
     }
-    
+
     @Override
     public void deactivateZone(Long id) {
         Zone zone = getZoneById(id);
