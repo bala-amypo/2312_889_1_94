@@ -27,8 +27,12 @@ public class BinServiceImpl implements BinService {
             throw new BadRequestException("Bin capacity must be greater than 0");
         }
         if (bin.getZone() != null && bin.getZone().getId() != null) {
-            bin.setZone(zoneRepository.findById(bin.getZone().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Zone not found")));
+            Zone zone = zoneRepository.findById(bin.getZone().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Zone not found"));
+            if (!zone.getActive()) {
+                throw new BadRequestException("Cannot create bin in inactive zone");
+            }
+            bin.setZone(zone);
         }
         if (bin.getActive() == null) {
             bin.setActive(true);
