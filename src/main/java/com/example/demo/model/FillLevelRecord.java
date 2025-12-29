@@ -19,7 +19,6 @@ public class FillLevelRecord {
     private LocalDateTime recordedAt;
 
     private Boolean isWeekend;
-
     public FillLevelRecord() {}
 
     public FillLevelRecord(Bin bin, Double fillPercentage, LocalDateTime recordedAt, Boolean isWeekend) {
